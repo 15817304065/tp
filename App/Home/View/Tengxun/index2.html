@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>腾讯AI智能接口 简易测试页面</title>
+    <style type="text/css">
+        .box{
+            margin-top: 50px;
+            padding: 5px;
+            width: 600px;
+            border: 1px solid red;
+        }
+        h4{
+            padding: 5px 0;
+        }
+    </style>
+        <script src="__APP__js/jquery3.1.1-min.js"></script>
+</head>
+<body>
+<H3>腾讯AI接口demo</H3>
+<div style="position: absolute;left: 50px;top: 0px">
+    <div class="box">
+        <h4>
+             文字识别 OCR
+        </h4>
+        <p>上传图片<input type="file" class="image" id="image1"></p>
+        <p><button id="bt1">识别文字</button></p>
+    </div>
+
+     <div class="box">
+        <h4>
+             文本翻译
+        </h4>
+        <p>输入文字:</p>
+        <p><textarea id="translate" style="width: 500px;height: 50px"></textarea></p>
+        <p><button id="bt2">翻译</button></p>
+    </div>
+
+    <div class="box">
+        <h4>
+            语音识别 ASR
+        </h4>
+         <p>上传语音文件<input type="file" id="mp3"></p>
+        <button id="bt3">识别语音</button>
+        
+    </div>
+
+    <div class="box">
+        <h4>
+            图片标签识别
+        </h4>
+         <p>上传图片文件(1M以内的JPG图片)<input type="file" class="image" id="image2"></p>
+        <button id="bt4">识别图片</button>
+        
+    </div>
+</div>
+<div style="width: 400px;height: 800px;border: 1px solid red;position: absolute;left: 670px;top:50px; ">
+    <p style="font-size: 20px;font-weight: bold;text-align: center;">result show</p>
+    <div id="show1"></div>
+        
+</div>
+
+<script type="text/javascript">
+    var baseimg1,baseimg2;
+    var base_audio="";
+
+    $("#image1").change(function(){
+       $('#show1').html("");
+      var file = this.files[0];
+        //判断类型是不是图片  
+        if(!/image\/\w+/.test(file.type)){     
+                alert("请确保文件为图像类型");   
+                return false;   
+        }   
+        var reader = new FileReader();   
+        reader.readAsDataURL(file);   
+        reader.onload = function(e){
+          image_base64=this.result.split(",")[1];
+           //就是base64 
+          baseimg1= image_base64;
+         
+        }
+    });
+      $("#image2").change(function(){
+         $('#show1').html("");
+      var file = this.files[0];
+        //判断类型是不是图片  
+        if(!/image\/\w+/.test(file.type)){     
+                alert("请确保文件为图像类型");   
+                return false;   
+        }   
+        var reader = new FileReader();   
+        reader.readAsDataURL(file);   
+        reader.onload = function(e){
+          image_base64=this.result.split(",")[1];
+           //就是base64 
+          baseimg2 = image_base64;   
+         
+        }
+    });
+
+    $("#mp3").change(function(){
+       $('#show1').html("");
+      var file = this.files[0];
+
+        //判断类型是不是音频  
+        if(!/audio\/\w+/.test(file.type)){     
+                alert("请确保文件为图像类型");   
+                return false;   
+        }   
+           var reader = new FileReader();   
+           reader.readAsDataURL(file);   
+          reader.onload = function(e){
+          audio_base64=this.result.split(",")[1];
+          base_audio = audio_base64;   
+        }
+    });
+
+
+    $('#bt1').click(function(){
+             if(!baseimg1){
+                 alert('请先上传图片');
+                 return;
+              }
+            $.ajax({
+                url: '{:U('Ocr')}',
+                data:{'image':baseimg1},
+                type:'post',
+                dataType:'json',
+                success: function (res) {
+                    console.log(res);
+                    $('#show1').html(res.msg);
+                }
+            
+          });
+    })
+
+   $('#bt2').click(function(){
+           var translate = $('#translate').val();
+             if(!translate){
+                 alert('请输入文字');
+                 return;
+              }
+            $.ajax({
+                url: '{:U('translate')}',
+                data:{'translate':translate},
+                type:'post',
+                dataType:'json',
+                success: function (res) {
+                   // alert(res.data);
+                    $('#show1').html(res.data);
+                }
+            
+          });
+    })
+
+    $('#bt3').click(function(){
+             if(!base_audio){
+                 alert('请先上传音频');
+                 return;
+              }
+            $.ajax({
+                url: '{:U('Asr')}',
+                data:{'base_audio':base_audio},
+                type:'post',
+                dataType:'json',
+                success: function (res) {
+                   // alert(res.data);
+                    $('#show1').html(res.data);
+                }
+            
+          });
+    })
+
+       $('#bt4').click(function(){
+             if(!baseimg2){
+                 alert('请先上传图片');
+                 return;
+              }
+            $.ajax({
+                url: '{:U('checkLabelImage')}',
+                data:{'image':baseimg2},
+                type:'post',
+                dataType:'json',
+                success: function (res) {
+                    console.log(res);
+                    $('#show1').html(res.msg);
+                }
+            
+          });
+    })
+
+$(document).ready(function(){
+    $('body').prepend('<div id="PHP_fullMask" style="display: none;width:100%;height:100%;background-color:#FBFBFB;opacity:0.8;-webkit-opacity:0.8;z-index:9999;position:fixed;top:0;left:0;"><div style=" text-align: center ;display: block;margin: 0 auto;top: 23%;position:  relative;"> <img src="__PUBLIC__/load2.gif" ></div></div>')
+
+}).ajaxStart(function(){
+
+    $("#PHP_fullMask").css({
+        "display":"block",
+        "top":$(document).scrollTop(),
+        "lift":$(document).scrollLeft(),
+    });
+    $("body").data("style", {
+        'oldheight': $("body").css('height'),
+        'oldwidth': $("body").css('width'),
+        'oldscrollTop': $(document).scrollTop(),
+        'oldscrollLeft': $(document).scrollLeft()
+    }).css({
+        "height":$(window).height(),
+        "width":$(window).width(),
+        "overflow":"hidden",
+        "display":"block"
+    });
+}).ajaxComplete(function(){
+    $("#PHP_fullMask").css({"display":"none"});
+    $("body").css({
+        "height":$('body').data('style').oldheight,
+        "width":$('body').data('style').oldwidth,
+        "overflow":"auto"
+    });
+});
+</script>

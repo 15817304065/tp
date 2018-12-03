@@ -1,0 +1,310 @@
+#index1 .animate1 {
+    -webkit-animation: fadeleft2 1s 0.5s ease both;
+    animation: fadeleft2 1s 0.5s ease both;
+    will-change: transform;
+}
+.index_show .animate1 {
+    -webkit-animation: fadeleft2 1s 0.5s ease both;
+    animation: fadeleft2 1s 0.5s ease both;
+    will-change: transform;
+}
+#index1 .animate2 {
+    -webkit-animation: fadeIn 1s 1s ease both;
+    animation: fadeIn 1s 1s ease both;
+    will-change: transform;
+}
+#index1 .animate3 {
+    -webkit-animation: yyz 3s 0.1s linear infinite;
+    animation: yyz 3s 0.1s linear infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    will-change: transform;
+}
+#index2 .animate1 {
+    -webkit-animation: fadeleft2 1s 0.5s ease both;
+    animation: fadeleft2 1s 0.5s ease both;
+    will-change: transform;
+}
+#index2 .animate2 {
+    -webkit-animation: fadeleft2 1s 0.8s ease both;
+    animation: fadeleft2 1s 0.8s ease both;
+    will-change: transform;
+}
+#index2 .animate3 {
+    -webkit-animation: fadeleft2 1s 1.1s ease both;
+    animation: fadeleft2 1s 1.1s ease both;
+    will-change: transform;
+}
+#index2 .animate4 {
+    -webkit-animation: faderight 1s 1.4s ease both;
+    animation: faderight 1s 1.4s ease both;
+    will-change: transform;
+}
+#index3 .animate1 {
+    -webkit-animation: fadeleft2 1s 0.5s ease both;
+    animation: fadeleft2 1s 0.5s ease both;
+    will-change: transform;
+}
+#index3 .animate2 {
+    -webkit-animation: fadeleft2 0.8s 0.8s ease both;
+    animation: fadeleft2 0.8s 0.8s ease both;
+}
+#index3 .animate3 {
+    -webkit-animation: fadeleft2 1s 1s ease both;
+    animation: fadeleft2 1s 1s ease both;
+    will-change: transform;
+}
+#index3 .animate4 {
+    -webkit-animation: faderight 0.8s 1.2s ease both;
+    animation: faderight 0.8s 1.2s ease both;
+}
+#index3 .animate5 {
+    -webkit-animation: yyz 3s 0.1s linear infinite;
+    animation: yyz 3s 0.1s linear infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    will-change: transform;
+}
+#index4 .animate1 {
+    -webkit-animation: fadeIn 1s 0.5s ease both;
+    animation: fadeIn 1s 0.5s ease both;
+    will-change: transform;
+}
+/*淡入*/
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes rota {
+    0% {
+        opacity: 0;
+        transform: rotateZ(-90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateZ(0deg);
+    }
+}
+@-webkit-keyframes rota {
+    0% {
+        opacity: 0;
+        -webkit-transform: rotateZ(-90deg);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: rotateZ(0deg);
+    }
+}
+/*脉冲*/
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05)
+    }
+    70% {
+        transform: scale(.9)
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+@-webkit-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1)
+    }
+}
+@keyframes fadeleft2 {
+    0% {
+        opacity: 0;
+        transform: translate3d(-100%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0%, 0%, 0);
+    }
+}
+@-webkit-keyframes fadeleft2 {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0%, 0%, 0);
+    }
+}
+/*左边进入*/
+
+@keyframes fadeleft {
+    0% {
+        opacity: 0;
+        transform: translate3d(-100%, 0%, 0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translate3d(200%, 0%, 0);
+    }
+    51% {
+        opacity: 0;
+        transform: translate3d(-100%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0%, 0%, 0);
+    }
+}
+@-webkit-keyframes fadeleft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0%, 0);
+    }
+    50% {
+        opacity: 0.5;
+        -webkit-transform: translate3d(200%, 0%, 0);
+    }
+    51% {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0%, 0%, 0);
+    }
+}
+/*右边进入*/
+
+@keyframes faderight {
+    0% {
+        opacity: 0;
+        transform: translate3d(100%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0%, 0%, 0);
+    }
+}
+@-webkit-keyframes faderight {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0%, 0%, 0);
+    }
+}
+/*右边进入*/
+
+@keyframes faderight2 {
+    0% {
+        opacity: 1;
+        transform: translate3d(0%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(-50%, 0%, 0);
+    }
+}
+@-webkit-keyframes faderight2 {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate3d(0%, 0%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(-50%, 0%, 0);
+    }
+}
+/*下边进入*/
+
+@keyframes fadetop {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -15%, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0%, 0%, 0);
+    }
+}
+@-webkit-keyframes fadetop {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -15%, 0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0%, 0%, 0);
+    }
+}
+/*脉冲*/
+
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5)
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+@-webkit-keyframes scaleIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.5)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1)
+    }
+}
+/*X轴旋转*/
+
+@keyframes yyz {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(10deg);
+    }
+}
+@-webkit-keyframes yyz {
+    0% {
+        -webkit-transform: rotateZ(0deg);
+    }
+    100% {
+        -webkit-transform: rotateZ(10deg);
+    }
+}
