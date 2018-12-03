@@ -35,7 +35,6 @@ class AsrController extends Controller
             $re = $obj->app_voice_assistant($data);
 
             $result = json_decode($re, true);
-
             if (!isset($result['result'])) {
                 apiResponse("0", $result['error_msg'], $result['error_code']);
             } else {
@@ -139,56 +138,56 @@ class AsrController extends Controller
 
     {
 
-        // if (!empty($_FILES['file'])) {
-        //     //通过uploadfile上传的临时文件
-        //     if (!in_array($_FILES['file']['type'], C('AUDIOTYPE'))) {
-        //         apiResponse("0", "音频格式不支持!");
-        //     }
-        //     $base_audio = base64_encode(file_get_contents($_FILES['file']['tmp_name']));
+        if (!empty($_FILES['file'])) {
+            //通过uploadfile上传的临时文件
+            if (!in_array($_FILES['file']['type'], C('AUDIOTYPE'))) {
+                apiResponse("0", "音频格式不支持!");
+            }
+            $base_audio = base64_encode(file_get_contents($_FILES['file']['tmp_name']));
 
-        //     $data = array(
-        //         "data" => $base_audio,
-        //     );
-        // } else if (!empty(I('post.'))) {
-        //     //接收base64图像数据
+            $data = array(
+                "data" => $base_audio,
+            );
+        } else if (!empty(I('post.'))) {
+            //接收base64图像数据
 
-        //     $p = I('post.');
+            $p = I('post.');
 
-        //     if (empty($p['data'])) {
-        //         apiResponse("0", "参数有误");
-        //     }
-        //     $base_audio = base64_encode(file_get_contents($p['data']));
-        //     $data       = array(
-        //         "data" => $base_audio,
-        //     );
-        // } else {
-        //     apiResponse("0", "参数有误");
-        // }
-        // $obj = new \Common\Util\EI();
+            if (empty($p['data'])) {
+                apiResponse("0", "参数有误");
+            }
+            $base_audio = base64_encode(file_get_contents($p['data']));
+            $data       = array(
+                "data" => $base_audio,
+            );
+        } else {
+            apiResponse("0", "参数有误");
+        }
+        $obj = new \Common\Util\EI();
 
-        // $re = $obj->long_sentence($data);
+        $re = $obj->long_sentence($data);
 
-        // $result = json_decode($re, true);
+        $result = json_decode($re, true);
 
-        // if (isset($result['result'])) {
-        //     $datas = array(
-        //         'job_id' => "e5974add-49de-45d3-bbf3-82c75fc72d12",
-        //         'format' => 2,
-        //     );
-        //     $res = $obj->getLong_sentence($datas);
+        if (isset($result['result'])) {
+            $datas = array(
+                'job_id' => "e5974add-49de-45d3-bbf3-82c75fc72d12",
+                'format' => 2,
+            );
+            $res = $obj->getLong_sentence($datas);
 
-        //     $res = json_decode($res, true);
+            $res = json_decode($res, true);
 
-        //     if (isset($res['result'])) {
+            if (isset($res['result'])) {
 
-        //         apiResponse("1", "success", "200", $res['result']['words']);
-        //     } else {
-        //         apiResponse("0", $result['error_msg'], $res['error_code']);
-        //     }
+                apiResponse("1", "success", "200", $res['result']['words']);
+            } else {
+                apiResponse("0", $result['error_msg'], $res['error_code']);
+            }
 
-        // } else {
-        //     apiResponse("0", $result['error_msg'], $result['error_code']);
-        // }
+        } else {
+            apiResponse("0", $result['error_msg'], $result['error_code']);
+        }
     }
 
     public function video_subtitle() // 视频字幕
